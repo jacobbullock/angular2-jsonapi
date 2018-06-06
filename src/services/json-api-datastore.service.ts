@@ -438,7 +438,7 @@ export class JsonApiDatastore {
     return Object.assign(configFromDecorator, this.config);
   }
 
-  protected transformSerializedNamesToPropertyNames<T extends JsonApiModel>(modelType: ModelType<T>, attributes: any) {
+  public transformSerializedNamesToPropertyNames<T extends JsonApiModel>(modelType: ModelType<T>, attributes: any) {
     const serializedNameToPropertyName = this.getModelPropertyNames(modelType.prototype);
     const properties: any = {};
 
@@ -452,6 +452,6 @@ export class JsonApiDatastore {
   }
 
   protected getModelPropertyNames(model: JsonApiModel) {
-    return Reflect.getMetadata('AttributeMapping', model);
+    return Reflect.getMetadata('AttributeMapping', model) || [];
   }
 }
